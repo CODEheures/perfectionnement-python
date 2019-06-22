@@ -46,7 +46,7 @@ class SetOfParliamentMembers:
 
         return result
 
-def launch_analysis(data_file, by_party = True):
+def launch_analysis(data_file, by_party = False):
     sopm = SetOfParliamentMembers('All Mps')
     sopm.data_from_csv(os.path.join("data", data_file))
     sopm.display_chart()
