@@ -6,6 +6,7 @@ import re
 import analysis.csv as c_an
 import analysis.xml as x_an
 
+
 def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", help="""Path file to analyse""")
@@ -15,10 +16,10 @@ def parse_arguments():
 def main():
     args = parse_arguments()
     try:
-        if args.file == None:
+        if args.file is None:
             raise Warning('Argument -f not found. Please read help with -h')
         else:
-            ext = re.search('^.+\.(\D{3})$', args.file)
+            ext = re.search(r'^.+\.(\D{3})$', args.file)
             extension = ext.group(1)
             if extension == "csv":
                 c_an.launch_analysis(args.file)
@@ -30,6 +31,7 @@ def main():
         log.warning(e)
     except FileNotFoundError as e:
         log.warning(e)
+
 
 if __name__ == "__main__":
     main()

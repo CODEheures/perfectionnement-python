@@ -3,10 +3,12 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 class SetOfParliamentMembers:
 
     def __init__(self, name):
         self.name = name
+        self.dataframe = None
 
     def data_from_csv(self, csv_file):
         self.dataframe = pd.read_csv(csv_file, sep=";")
@@ -32,7 +34,7 @@ class SetOfParliamentMembers:
         plt.show()
 
     def split_by_political_party(self):
-        result={}
+        result = {}
         data = self.dataframe
 
         # parties list
@@ -40,13 +42,14 @@ class SetOfParliamentMembers:
 
         for party in all_parties:
             data_subset = data[data.parti_ratt_financier == party]
-            subset = SetOfParliamentMembers('MPs from party {party}'.format(party = party))
+            subset = SetOfParliamentMembers('MPs from party {party}'.format(party=party))
             subset.data_from_dataframe(data_subset)
             result[party] = subset
 
         return result
 
-def launch_analysis(data_file, by_party = False):
+
+def launch_analysis(data_file, by_party=False):
     sopm = SetOfParliamentMembers('All Mps')
     sopm.data_from_csv(os.path.join("data", data_file))
     sopm.display_chart()
